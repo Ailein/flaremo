@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "flaremo",
+  "main": "./apps/worker/src/index.ts",
+  "compatibility_date": "2026-06-27",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "assets": {
+    "directory": "./apps/web/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "flaremo",
+      "database_id": "ada3dc42-389f-4bb7-90a3-4460264c7781",
+      "migrations_dir": "./migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "ATTACHMENTS",
+      "bucket_name": "flaremo-attachments","preview_bucket_name": "flaremo-attachments"
+    }
+  ],
+  "vars": {
+    "FLAREMO_SINGLE_USER_EMAIL": "owner@flaremo.local",
+    "FLAREMO_SINGLE_USER_NAME": "FlareMo Owner"
+  }
+}
